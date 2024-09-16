@@ -35,7 +35,7 @@ public class ElasticSearchQuery {
     @Autowired
     private ElasticsearchClient elasticsearchClient;
 
-    private final String indexName = "lokals";
+    private final String indexName = "location_id";
 
 
     public String createOrUpdateDocument(Lokal lokal) throws IOException {
