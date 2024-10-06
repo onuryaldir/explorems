@@ -33,8 +33,8 @@ public class ElasticSearchController {
     }
 
     @GetMapping("/searchDocumentByKey")
-    public ResponseEntity<Object> createOrUpdateDocument() throws IOException {
-        List<Lokal> lokals = elasticSearchQuery.searchAllDocuments1("gal");
+    public ResponseEntity<Object> createOrUpdateDocument(@RequestParam String word) throws IOException {
+        List<Lokal> lokals = elasticSearchQuery.searchAllDocuments1(word);
         return new ResponseEntity<>(lokals, HttpStatus.OK);
     }
 }
