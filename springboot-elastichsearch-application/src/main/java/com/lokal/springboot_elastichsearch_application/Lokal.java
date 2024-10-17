@@ -10,7 +10,11 @@ import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Getter
 @Setter
 @Document(indexName = "istanbul")
@@ -39,6 +43,21 @@ public class Lokal {
 
     @Field(type = FieldType.Text, name = "definition")
     private String definition;
+
+    @Field(type = FieldType.Text, name = "images")
+    private List<String> images;
+
+    @JsonProperty("images")
+    public void setImages(String images) {
+        // Split the comma-separated string and store it as a list
+        if (images != null && !images.isEmpty()) {
+            this.images = Arrays.stream(images.split(","))
+                    .map(String::trim) // Remove extra spaces if any
+                    .collect(Collectors.toList());
+        } else {
+            this.images = null;
+        }
+    }
 
     @Field(type = FieldType.Text, name = "primary_theme")
     private String primary_theme;
