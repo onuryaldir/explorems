@@ -8,7 +8,8 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 import java.util.List;
 
-@RestController("api/explore")
+@RestController()
+@RequestMapping("/api/explore")
 public class ElasticSearchController {
 
     @Autowired
@@ -41,5 +42,10 @@ public class ElasticSearchController {
     public ResponseEntity<Object> getAllDocument() throws IOException {
         List<Lokal> lokals = elasticSearchQuery.getAllDocuments();
         return new ResponseEntity<>(lokals, HttpStatus.OK);
+    }
+
+    @GetMapping("/heartbeat")
+    public ResponseEntity<Object> heartbeat() throws IOException {
+        return new ResponseEntity<>("hello", HttpStatus.OK);
     }
 }
